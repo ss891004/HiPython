@@ -39,7 +39,6 @@ def add_user():
     return '创建成功'
 
 
-
 second = Blueprint('second', __name__)
 
 @second.route('/hello/')
@@ -47,10 +46,7 @@ def hello():
     return 'Second Blue'
 
 
-
 third = Blueprint('third', __name__)
-
-
 @third.route('/hi/')
 def hi():
     return 'Hi Thrid'

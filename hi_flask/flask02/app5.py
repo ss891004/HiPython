@@ -5,11 +5,10 @@ app = Flask(__name__)
 
 app.config.from_object(settings)
 
-@app.route('/')
-def index():
-    return "hello world. hello python"
 
-print(app.config)
+# jinja2 模板引擎
+
+
 
 if __name__=="__main__":
 

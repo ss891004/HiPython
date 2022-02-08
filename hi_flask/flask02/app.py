@@ -9,7 +9,12 @@ app.config.from_object(settings)
 def index():
     return "hello world. hello python"
 
-print(app.config)
+# 路由的原理
+
+def index2():
+    return "welcome to index2.."
+app.add_url_rule("/index2",view_func=index2)
+
 
 if __name__=="__main__":
 

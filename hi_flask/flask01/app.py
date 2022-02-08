@@ -1,5 +1,4 @@
 # 首先导入了Flask类，这个类的实例将会是一个WSGI应用。
-from pickle import TRUE
 from flask import Flask
 
 # 接着创建一个该类的实例，传递给它模块或包的名称，这样Flask知道去哪里寻找模板、静态文件等。
