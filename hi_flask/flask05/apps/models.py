@@ -16,13 +16,13 @@ class Student(dbs.Model):
     s_password = dbs.Column(dbs.String(256))
 
 class Person(dbs.Model):
-	__tablename__='person'
+	__tablename__='person'      # 表名
 	id = dbs.Column(dbs.Integer,primary_key=True)
 	name = dbs.Column(dbs.String(16),unique=True)
 
 
 class Animal(dbs.Model):
-    __abstract__= True
+    __abstract__= True  # 抽象的模型是不会在数据库中产生映射的
     id = dbs.Column(dbs.Integer, primary_key=True, autoincrement =True)
     a_name = dbs.Column(dbs.String(16))
 
