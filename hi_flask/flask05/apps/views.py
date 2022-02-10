@@ -5,7 +5,8 @@ from exts.ext import dbs
 from .models import User
 
 
-first = Blueprint('first', __name__,template_folder='../template')
+# 模版文件在当前目录的template 中
+first = Blueprint('first', __name__,template_folder='template')
 
 
 @first.route('/index/')
@@ -17,14 +18,12 @@ def index():
 @first.route('/createdb/')
 def createdb():
     dbs.create_all()
-
     return '创建成功'
 
 
 @first.route('/dropdb/')
 def dropdb():
     dbs.drop_all()
-
     return '删除成功'
 
 
@@ -32,11 +31,21 @@ def dropdb():
 def add_user():
     user = User()
     user.username = "Tom"
+    user.phone="15250630870"
+    user.password="Tommmmm"
+    user.sex='1'
 
     dbs.session.add(user)
     dbs.session.commit()
 
     return '创建成功'
+
+@first.route('/getuser/')
+def get_user():
+
+    return '创建成功'
+
+
 
 
 second = Blueprint('second', __name__)
