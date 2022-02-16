@@ -15,3 +15,6 @@ B. 时候后初始化中的个Api对象( 防止对象被重复引用)
 C. 创建一个model 类，并迁移到相应的数据库中。
 D. 创建一个继承Resource 的资源类， 并生成 GET，POST，DELETE，PUT等等方法。
 E. 在Api 对象中增加资源类，并设置访问path（或在增加一个namespace）
+
+
++ 前后端分离
