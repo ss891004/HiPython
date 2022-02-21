@@ -41,7 +41,6 @@ class Todo(Resource):
 api.add_namespace(ns,path='/hw2')
 
 #==============================================================================
-hw_bp = Blueprint('hw3', __name__)
 
 class User(Resource):
     def get(self):
@@ -64,5 +63,5 @@ class HelloWorld1(Resource):
     def get(self):
         return {'hello': 'world'}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)

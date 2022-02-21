@@ -11,8 +11,6 @@ model = ns.model('Model', {
     #'uri': fields.Url('todo_ep')
 })
 
-
-
 @ns.route('/aaaa')
 class Todo(Resource):
     @ns.marshal_with(model)
