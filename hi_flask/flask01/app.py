@@ -1,6 +1,8 @@
 # 首先导入了Flask类，这个类的实例将会是一个WSGI应用。
 from flask import Flask
 
+print(__name__)
+
 # 接着创建一个该类的实例，传递给它模块或包的名称，这样Flask知道去哪里寻找模板、静态文件等。
 app = Flask(__name__)
 
@@ -13,4 +15,4 @@ def test():
 
 if __name__ =="__main__":
     # 最后用函数run()启动本地服务器来运行Flask应用。
-    app.run(host='0.0.0.0',port='3456',debug=TRUE)
+    app.run(host='0.0.0.0',port='3456',debug=True)
