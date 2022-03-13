@@ -233,9 +233,5 @@ sort
 - {{ url_for('static', filename='xxx') }}
 
 
+## 蓝图
 
-
-
-###  会话
-+ cookie
-+ session
