@@ -29,6 +29,7 @@ def index3():
         u.save()
 
         # 转发到首页，查询出当前的所有用户
+        # url_for 反向解析
         return redirect(url_for('bp_user.index')) # 蓝本的名称+函数的名称，不是路由中的名称
 
     # get请求，首次访问，直接返回页面
