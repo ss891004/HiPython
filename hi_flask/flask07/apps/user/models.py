@@ -14,6 +14,8 @@ class User(dbs.Model):
     isdelete=dbs.Column(dbs.Boolean,default=False)
     rdatetime = dbs.Column(dbs.DateTime,default=datetime.now)
 
+    articles=dbs.relationship('Article',backref='tb_user')
+
     def __str__(self):
         return self.username
 

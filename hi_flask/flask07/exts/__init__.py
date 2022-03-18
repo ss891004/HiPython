@@ -19,4 +19,5 @@ def create_app():
     # 加载路由
     init_view(app)
 
+    print(app.url_map)
     return app

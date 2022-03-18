@@ -45,24 +45,6 @@ class DevelopConfig(Config):
 
 
 
-class ProductConfig(Config):
-
-    dbinfo = {
-
-        "ENGINE": "mysql",
-        "DRIVER": "mysqldb",
-        "USER": "root",
-        "PASSWORD": " ",
-        "HOST": "localhost",
-        "PORT": "3306",
-        "NAME": " "
-
-    }
-
-    SQLALCHEMY_DATABASE_URI = get_db_uri(dbinfo)
-
-
 envs = {
-    "develop": DevelopConfig,
-    "product": ProductConfig
+    "develop": DevelopConfig
 }

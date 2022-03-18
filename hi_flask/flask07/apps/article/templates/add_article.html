@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加文章</title>
+</head>
+<body>
+    <form action="url_for('bp_article.add')" method="post">
+        <p><input type="text" name="a_title" placeholder="文章标题"></p>
+        <p> <textarea cols="50" rows="10" name="a_context" >在这里输入内容...</textarea></p>
+        <p><select>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+            </select></p>
+        <p><input type="button">添加文章</p>
+    </form>
+    
+</body>
+</html>
