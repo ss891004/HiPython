@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根据文章,查询评论</title>
+</head>
+
+<body>
+
+    <p>{{u.title}}</p>
+    <!-- 显示用户信息 -->
+
+    <table>
+        <!-- 用户表中有个relationship的关系的列，通过外键查询到该用户所有的文件 -->
+        {% for item in u.comments %}
+        <tr>
+            <td>{{item.user_id}}</td>
+            <td>{{item.article_id}}</td>
+            <td>{{item.content}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
+
+</html>

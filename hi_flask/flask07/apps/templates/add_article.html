@@ -7,16 +7,17 @@
     <title>添加文章</title>
 </head>
 <body>
-    <form action="url_for('bp_article.add')" method="post">
+    <form action="{{url_for('bp_article.add')}}" method="post">
         <p><input type="text" name="a_title" placeholder="文章标题"></p>
         <p> <textarea cols="50" rows="10" name="a_context" >在这里输入内容...</textarea></p>
-        <p><select>
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-            </select></p>
-        <p><input type="button">添加文章</p>
+        <p><select name="a_user">
+         
+            {% for item in us %}
+            <option value="{{item.id}}">{{item.username}}</option>
+            {% endfor %}
+        </select></p>
+
+        <p><input type="submit" value="添加文章"></p>
     </form>
     
 </body>

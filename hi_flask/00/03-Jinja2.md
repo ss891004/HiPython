@@ -232,6 +232,3 @@ sort
   - 参数有一个filename
 - {{ url_for('static', filename='xxx') }}
 
-
-## 蓝图
-
