@@ -1,3 +1,13 @@
+## flash 
++ 消息闪现
++ 分类闪现
+
+
+## logging
+
+
+
+
 ## 几个版本
 + pip install flask-restplus  停更
 + pip install Flask-RESTful     
@@ -15,6 +25,25 @@ B. 时候后初始化中的个Api对象( 防止对象被重复引用)
 C. 创建一个model 类，并迁移到相应的数据库中。
 D. 创建一个继承Resource 的资源类， 并生成 GET，POST，DELETE，PUT等等方法。
 E. 在Api 对象中增加资源类，并设置访问path（或在增加一个namespace）
+
+
+
++ 参数传入
+
++ endpoint
+
++ 输出简单结构
+
++ 输出复杂结构
+
+
+
+## 实战
++ 新闻的展示，评论，回复，CRUD
++ 用户的登录，注册
++ 密码的修改
+
+
 
 
 + 前后端分离
