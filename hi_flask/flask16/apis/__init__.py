@@ -13,7 +13,7 @@ api =Api(ordered=True)
 # 注册命名空间
 api.add_namespace(hw02_ns)
 # 注册资源，此时该资源属于默认命名空间
-api.add_resource(HelloWorld,'/b')
+api.add_resource(HelloWorld,'/b', endpoint='xxxy')
 
 api.add_namespace(hw03_ns)
 # 将api 注册到 app 上

@@ -6,6 +6,7 @@ from models.user import User
 
 ns = Namespace('hw03', description='hi message')
 
+# 请求参数， 响应结构
 
 # 参数解析
 parser1 = reqparse.RequestParser() # 解析对象
@@ -22,6 +23,9 @@ reps_user1 = {
 }
 
 r_parser = ns.model('xxxxx',reps_user1)
+
+
+# 输出基本类型
 
 @ns.route('/h03')
 class HelloWorld03(Resource):
@@ -40,8 +44,8 @@ class HelloWorld03(Resource):
     def post(self):
         args = parser1.parse_args()
         id=args['p_2']
-        u= User.query.filter_by(id=id).first()
-
+        # u= User.query.filter_by(id=id).first()
+        u=User.query.all()
         # 多条记录
         return u
 
@@ -50,9 +54,9 @@ class HelloWorld03(Resource):
         ns.abort(403)
 
 
-# 参数解析
+# 请求参数，文件上传
 parser2 = reqparse.RequestParser() # 解析对象
-parser2.add_argument('file', location='files', type=FileStorage, required=True) # File Upload
+parser2.add_argument('file', location='files', type=FileStorage, required=True) 
 
 @ns.route('/h04')
 class HelloWorld04(Resource):
@@ -63,3 +67,8 @@ class HelloWorld04(Resource):
         uploaded_file = args['file']
         print(uploaded_file)
 
+
+
+
+
+# 输出复杂结构

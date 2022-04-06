@@ -12,4 +12,5 @@ def create_app():
     init_ext(app)
     init_api(app)
 
+    print(app.url_map)
     return app
