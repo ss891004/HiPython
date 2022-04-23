@@ -1,6 +1,7 @@
 from exts import create_app
 
 
+## 程序入口  export FLASK_APP=app.py  flask run 
 app = create_app()
 
 

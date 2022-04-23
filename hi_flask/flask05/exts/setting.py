@@ -15,6 +15,7 @@ def get_db_uri(dbinfo):
 
     return "{}+{}://{}:{}@{}:{}/{}".format(engine, driver, user, password, host, port, name)
 
+## 配置参数
 
 class Config:
 
@@ -40,7 +41,8 @@ class DevelopConfig(Config):
         "NAME": "hi_flask"
 
     }
-
+    ## 连接mysql 数据的字符串
+    ## 使用mysql 官方的驱动
     SQLALCHEMY_DATABASE_URI = get_db_uri(dbinfo)
 
 

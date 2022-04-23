@@ -17,7 +17,9 @@ class User(dbs.Model):
 
     # 这关系可以在本模型中，也可以在有外键的模型中，但是只能出现一次
     # 这关系只限制在代码层面，不涉及数据库
-    articles=dbs.relationship('Article', backref='br_user')
+    # backref：用于指定表之间的双向关系，如果在一对多的关系中建立双向的关系，这样的话在对方看来这就是一个多对一的关系。
+    # lazy：指定 SQLAlchemy 加载关联对象的方式。
+    articles=dbs.relationship('Article', backref='br_user',lazy=dynamic)
 
     def __str__(self):
         return self.username
