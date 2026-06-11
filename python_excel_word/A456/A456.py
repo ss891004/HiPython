@@ -1,0 +1,21 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+#创建圆环图(myDoughnutChart)
+myDoughnutChart=openpyxl.chart.DoughnutChart()
+#根据员工表(mySheet)的B4:B8范围的单元格数据设置圆环图的各个切片大小
+myDoughnutChart.add_data(openpyxl.chart.Reference(mySheet,
+                                     min_col=2,min_row=4,max_row=8))
+#根据员工表(mySheet)的A4:A8范围的单元格数据设置圆环图的图例数据
+myDoughnutChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                      min_col=1,min_row=4,max_row=8))
+#设置圆环图(myDoughnutChart)的样式
+myDoughnutChart.style=26
+myDoughnutChart.series[0].dLbls=openpyxl.chart.label.DataLabelList()
+#在圆环图(myDoughnutChart)的切片上显示百分比
+myDoughnutChart.series[0].dLbls.showPercent=True
+#设置圆环图(myDoughnutChart)的标题
+myDoughnutChart.title="使用圆环图展示华茂集团员工人数"
+#将圆环图(myDoughnutChart)添加到员工表(mySheet)的C1单元格
+mySheet.add_chart(myDoughnutChart,"C1")
+myBook.save('结果表-员工表.xlsx')

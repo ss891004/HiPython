@@ -1,0 +1,23 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+#创建嵌套圆环图(myDoughnutChart)
+myDoughnutChart=openpyxl.chart.DoughnutChart()
+#使用员工表(mySheet)的2016年人数和2017年人数这两列数据
+#作为嵌套圆环图(myDoughnutChart)的各个切片数据
+myDoughnutChart.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=3,min_row=3,max_row=8),titles_from_data=True)
+#根据员工表(mySheet)的A4:A8范围的单元格数据设置嵌套圆环图的图例数据
+myDoughnutChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                       min_col=1,min_row=4,max_row=8))
+#设置嵌套圆环图(myDoughnutChart)的样式
+myDoughnutChart.style=26
+myDoughnutChart.title="使用圆环图展示2016-2017年员工人数"
+myDoughnutChart.series[0].dLbls=openpyxl.chart.label.DataLabelList()
+#在嵌套圆环图(里层的)切片上显示数值(2016年各个分公司的人数)
+myDoughnutChart.series[0].dLbls.showVal=True
+myDoughnutChart.series[1].dLbls=openpyxl.chart.label.DataLabelList()
+#在嵌套圆环图(外层的)切片上显示数值(2017年各个分公司的人数)
+myDoughnutChart.series[1].dLbls.showVal=True
+mySheet.add_chart(myDoughnutChart,"D1")
+myBook.save('结果表-员工表.xlsx')

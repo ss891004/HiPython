@@ -1,0 +1,20 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+#创建投影饼图(myProjectedPieChart)
+myProjectedPieChart=openpyxl.chart.ProjectedPieChart()
+#根据员工表(mySheet)的B4:B8范围的单元格数据设置饼图的各个切片大小
+myProjectedPieChart.add_data(openpyxl.chart.Reference(mySheet,
+                                    min_col=2,min_row=4,max_row=8))
+#根据员工表(mySheet)的A4:A8范围的单元格数据设置饼图的图例数据
+myProjectedPieChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                    min_col=1,min_row=4,max_row=8))
+#设置投影类型为饼图(在独立饼图中投影大饼图的超小切片)
+myProjectedPieChart.type="pie"
+#设置分割类型为pos
+myProjectedPieChart.splitType="pos"
+#设置饼图(myProjectedPieChart)的标题
+myProjectedPieChart.title="使用投影饼图展示华茂集团员工人数"
+#将饼图(myProjectedPieChart)添加到员工表(mySheet)的C1单元格
+mySheet.add_chart(myProjectedPieChart,"C1")
+myBook.save('结果表-员工表.xlsx')

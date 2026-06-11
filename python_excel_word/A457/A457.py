@@ -1,0 +1,30 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+myDoughnutChart=openpyxl.chart.DoughnutChart(holeSize=50)
+myDoughnutChart.add_data(openpyxl.chart.Reference(mySheet,
+                                    min_col=2,min_row=4,max_row=8))
+myDoughnutChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                    min_col=1,min_row=4,max_row=8))
+myDoughnutChart.style=26
+#设置第2个切片(广州分公司)凸出显示
+#mySlice2=openpyxl.chart.series.DataPoint(idx=1,explosion=10)
+#myDoughnutChart.series[0].data_points=[mySlice2]
+mySlices=[openpyxl.chart.series.DataPoint(idx=i) for i in range(5)]
+myDoughnutChart.series[0].data_points=mySlices
+mySlices[1].explosion=20
+#创建网格填充样式(myPattern)
+myPattern=openpyxl.chart.marker.PatternFillProperties(prst="smGrid")
+#设置网格填充样式(myPattern)的前景色为白色
+myPattern.foreground=openpyxl.chart.marker.ColorChoice(prstClr="white")
+#设置网格填充样式(myPattern)的背景色为黑色
+myPattern.background=openpyxl.chart.marker.ColorChoice(prstClr="black")
+#使用网格填充样式(myPattern)作为第2个切片的填充样式
+#mySlice2=openpyxl.chart.marker.DataPoint(idx=1)
+#mySlice2.graphicalProperties.pattFill=myPattern
+#myDoughnutChart.series[0].dPt.append(mySlice2)
+mySlices[1].graphicalProperties.pattFill=myPattern
+myDoughnutChart.series[0].dPt.append(mySlices[1])
+myDoughnutChart.title="使用圆环图展示华茂集团员工人数"
+mySheet.add_chart(myDoughnutChart,"C1")
+myBook.save('结果表-员工表.xlsx')

@@ -1,0 +1,22 @@
+import openpyxl,copy
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+#创建3D柱形图(myBarChart3D)
+myBarChart3D=openpyxl.chart.BarChart3D()
+#设置3D柱形图(myBarChart3D)的大小
+myBarChart3D.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=3,min_row=3,max_row=8),titles_from_data=True)
+#设置3D柱形图(myBarChart3D)的公司名称标签
+myBarChart3D.set_categories(openpyxl.chart.Reference(mySheet,
+                                       min_col=1,min_row=4,max_row=8))
+#设置3D柱形图(myBarChart3D)的标题
+myBarChart3D.title="使用3D柱形图展示华茂集团员工人数"
+#将3D柱形图(myBarChart3D)添加到员工表(mySheet)的A9单元格
+mySheet.add_chart(myBarChart3D,"A9")
+#表示将3D柱形图(myBarChart3D)深度复制成3D柱形图(myChart3D)
+myChart3D=copy.deepcopy(myBarChart3D)
+myChart3D.type="bar"
+myChart3D.title="使用3D条形图展示华茂集团员工人数"
+#将3D柱形图(myChart3D)添加到员工表(mySheet)的A24单元格
+mySheet.add_chart(myChart3D,"A24")
+myBook.save('结果表-员工表.xlsx')

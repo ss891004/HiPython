@@ -1,0 +1,31 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx',data_only=True)
+mySheet=myBook.active
+#按行获取员工表(mySheet)的单元格数据(myValues)
+myValues=list(mySheet.values)
+myNewBook=openpyxl.Workbook()
+myNewSheet=myNewBook.active
+myNewSheet.title='员工表'
+myNewSheet.append(['工号','部门','姓名','最高学历',
+                   '专业','出生年份','出生月份','出生日'])
+#从myValues的第2行开始逐行循环(到最后一行)
+for myRow in myValues[1:]:
+    myList=[]
+    #拼接行(myRow)的第1列到第5列之间的单元格数据
+    myList+=myRow[0:5]
+    #获取行(myRow)的第6列(出生日期列)的单元格数据
+    myDate=myRow[5]
+    #查询字符'年'在出生日期字符串(如‘1989年2月18日’)的位置(索引)
+    myYearPos=myDate.find('年')
+    #获取年份字符串(如‘1989年’)
+    myYear=myDate[0:myYearPos+1]
+    #查询字符'月'在出生日期字符串的位置(索引)
+    myMonthPos=myDate.find('月')
+    #获取月份字符串(如‘2月’)
+    myMonth=myDate[myYearPos+1:myMonthPos+1]
+    #获取出生日字符串(如‘18日’)
+    myDay=myDate[myMonthPos+1:]
+    #在列表(myList)中添加年份、月份、出生日
+    myList+=[myYear,myMonth,myDay]
+    myNewSheet.append(myList)
+myNewBook.save('结果表-员工表.xlsx')

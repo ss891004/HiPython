@@ -1,0 +1,22 @@
+import openpyxl
+myBook=openpyxl.load_workbook('温度表.xlsx')
+mySheet=myBook.active
+#创建面积图(myAreaChart)
+myAreaChart=openpyxl.chart.AreaChart()
+#设置面积图(myAreaChart)的数据点(在y轴上的位置)
+myAreaChart.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=3,min_row=3,max_row=13),titles_from_data=True)
+#设置面积图(myAreaChart)的x轴的日期标签
+myAreaChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                min_col=1,min_row=4,max_row=13))
+#自定义面积图(myAreaChart)的x轴的日期格式(根据日期标签)
+myAreaChart.x_axis.number_format='d日'
+#在面积图(myAreaChart)的底部绘制图例
+myAreaChart.legend.position='b'
+#设置面积图(myAreaChart)的样式(23)
+myAreaChart.style=23
+#设置面积图(myAreaChart)的标题
+myAreaChart.title="使用面积图展示南湖气温变化"
+#将面积图(myAreaChart)添加到温度表(mySheet)的D1单元格
+mySheet.add_chart(myAreaChart,"D1")
+myBook.save('结果表-温度表.xlsx')

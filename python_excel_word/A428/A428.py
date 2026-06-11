@@ -1,0 +1,30 @@
+import openpyxl
+myBook=openpyxl.load_workbook('收入表.xlsx')
+mySheet=myBook.active
+myLineChart=openpyxl.chart.LineChart()
+myLineChart.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=5,min_row=3,max_row=8),titles_from_data=True)
+myLineChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                       min_col=1,min_row=4,max_row=8))
+myLineChart.title="使用百分比堆叠折线图展示华茂集团收入"
+#表示在折线图(myLineChart)上以百分比堆叠样式绘制折线
+myLineChart.grouping="percentStacked"
+#在折线图(myLineChart)上使用三角形符号(triangle)标记第1条折线的数据点
+myLineChart.series[0].marker.symbol="triangle"
+#在折线图(myLineChart)上设置第1条折线的线条样式(dash)
+myLineChart.series[0].graphicalProperties.line.dashStyle="dash"
+#在折线图(myLineChart)上设置第1条折线的线条宽度(20050)
+myLineChart.series[0].graphicalProperties.line.width=20050
+myLineChart.series[1].marker.symbol="triangle"
+myLineChart.series[1].graphicalProperties.line.dashStyle="sysDot"
+myLineChart.series[1].graphicalProperties.line.width=20050
+myLineChart.series[2].marker.symbol="triangle"
+myLineChart.series[2].graphicalProperties.line.dashStyle="sysDashDot"
+myLineChart.series[2].graphicalProperties.line.width=20050
+myLineChart.series[3].marker.symbol="triangle"
+myLineChart.series[3].graphicalProperties.line.dashStyle="solid"
+myLineChart.series[3].graphicalProperties.line.width=20050
+#在折线图(myLineChart)的底部绘制图例
+myLineChart.legend.position='b'
+mySheet.add_chart(myLineChart,"A9")
+myBook.save('结果表-收入表.xlsx')

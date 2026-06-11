@@ -1,0 +1,19 @@
+import docx
+myDocument=docx.Document('背诵名篇.docx')
+#在Word文件中禁止在第1节之外的节中显示页眉(注意：从第0节开始)
+myDocument.sections[1].header.is_linked_to_previous=False
+myDocument.sections[2].header.is_linked_to_previous=False
+myDocument.sections[3].header.is_linked_to_previous=False
+#允许在Word文件的第1节中启用首页个性化的页眉页脚
+myDocument.sections[1].different_first_page_header_footer=True
+#在Word文件的第1节中添加普通页眉
+myParagraph1=myDocument.sections[1].header.paragraphs[0]
+myParagraph1.text='这是第1节普通页的页眉'
+myParagraph1.alignment=docx.enum.text.WD_PARAGRAPH_ALIGNMENT.CENTER
+myParagraph1.runs[0].font.size=docx.shared.Pt(12)
+#在Word文件的第1节中添加个性化的首页页眉
+myParagraph11=myDocument.sections[1].first_page_header.paragraphs[0]
+myParagraph11.text='🔉🔉🔉这是第1节首页的页眉🔊🔊🔊'
+myParagraph11.alignment=docx.enum.text.WD_PARAGRAPH_ALIGNMENT.CENTER
+myParagraph11.runs[0].font.size=docx.shared.Pt(12)
+myDocument.save('我的Word文件-背诵名篇.docx')

@@ -1,0 +1,20 @@
+import openpyxl
+myBook=openpyxl.load_workbook('收入表.xlsx')
+mySheet=myBook.active
+#创建3D柱形图(myBarChart3D)
+myBarChart3D=openpyxl.chart.BarChart3D()
+#设置3D柱形图(myBarChart3D)的各个柱子的大小
+myBarChart3D.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=5,min_row=3,max_row=8),titles_from_data=True)
+#设置3D柱形图(myBarChart3D)的x轴的公司名称标签
+myBarChart3D.set_categories(openpyxl.chart.Reference(mySheet,
+                                      min_col=1,min_row=4,max_row=8))
+#设置3D柱形图(myBarChart3D)的标题
+myBarChart3D.title="使用堆叠3D柱形图展示华茂集团收入"
+#表示以堆叠样式展示3D柱形图(myBarChart3D)
+myBarChart3D.grouping="stacked"
+#设置3D柱形图(myBarChart3D)的样式(1-48)
+myBarChart3D.style=35
+#将3D柱形图(myBarChart3D)添加到收入表(mySheet)的A9单元格
+mySheet.add_chart(myBarChart3D,"A9")
+myBook.save('结果表-收入表.xlsx')

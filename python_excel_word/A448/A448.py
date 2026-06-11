@@ -1,0 +1,24 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+myPieChart=openpyxl.chart.PieChart()
+myPieChart.add_data(openpyxl.chart.Reference(mySheet,min_col=2,
+                                             min_row=4,max_row=8))
+myPieChart.set_categories(openpyxl.chart.Reference(mySheet,min_col=1,
+                                                   min_row=4,max_row=8))
+myPieChart.style=26
+#创建网格填充样式(myPattern)
+myPattern=openpyxl.chart.marker.PatternFillProperties(prst="smGrid")
+#设置网格填充样式(myPattern)的前景色为白色
+myPattern.foreground=openpyxl.chart.marker.ColorChoice(prstClr="white")
+#设置网格填充样式(myPattern)的背景色为黑色
+myPattern.background=openpyxl.chart.marker.ColorChoice(prstClr="black")
+#使用网格填充样式(myPattern)作为饼图(myPieChart)所有切片的填充样式
+#myPieChart.series[0].graphicalProperties.pattFill=myPattern
+mySlice2=openpyxl.chart.marker.DataPoint(idx=1)
+#使用网格填充样式(myPattern)作为饼图(myPieChart)第2个切片的填充样式
+mySlice2.graphicalProperties.pattFill=myPattern
+myPieChart.series[0].dPt.append(mySlice2)
+myPieChart.title="使用饼图展示华茂集团员工人数"
+mySheet.add_chart(myPieChart,"C1")
+myBook.save('结果表-员工表.xlsx')

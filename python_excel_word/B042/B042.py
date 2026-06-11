@@ -1,0 +1,19 @@
+import docx
+myDocument=docx.Document('智慧书.docx')
+#在Word文件(myDocument)中新增段落(myParagraph)
+myParagraph=myDocument.add_paragraph()
+#在段落(myParagraph)中新增块(myRun1)
+myRun1=myParagraph.add_run('摘自《智慧书》')
+#设置块(myRun1)的字体大小
+myRun1.font.size=docx.shared.Pt(16)
+#在段落(myParagraph)中新增块(myRun2)
+myRun2=myParagraph.add_run('作者：巴尔塔沙·葛拉西安')
+#设置块(myRun2)的字体大小
+myRun2.font.size=docx.shared.Pt(16)
+#设置块(myRun2)为上标
+myRun2.font.superscript=True
+##设置块(myRun2)为下标
+#myRun2.font.subscript=True
+#设置段落(myParagraph)距离左端缩进1英寸
+myParagraph.paragraph_format.left_indent=docx.shared.Inches(1)
+myDocument.save('我的Word文件-智慧书.docx')

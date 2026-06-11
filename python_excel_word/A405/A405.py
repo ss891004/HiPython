@@ -1,0 +1,20 @@
+import openpyxl
+myBook=openpyxl.load_workbook('收入表.xlsx')
+mySheet=myBook.active
+#创建柱形图(myBarChart)
+myBarChart=openpyxl.chart.BarChart()
+#设置柱形图(myBarChart)各个柱子的大小
+myBarChart.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=5,min_row=3,max_row=8),titles_from_data=True)
+#设置柱形图(myBarChart)的x轴的公司名称标签
+myBarChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                       min_col=1,min_row=4,max_row=8))
+#设置柱形图(myBarChart)的标题
+myBarChart.title="使用百分比堆叠柱形图展示华茂集团收入"
+#表示以百分比堆叠样式展示柱形图(myBarChart)
+myBarChart.grouping="percentStacked"
+#表示根据多列数据创建的多个柱子100%堆叠在一起，否则将出现交错
+myBarChart.overlap=100
+#将柱形图(myBarChart)添加到收入表(mySheet)的A9单元格
+mySheet.add_chart(myBarChart,"A9")
+myBook.save('结果表-收入表.xlsx')

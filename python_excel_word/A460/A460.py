@@ -1,0 +1,46 @@
+import openpyxl
+myBook=openpyxl.load_workbook('住院表.xlsx')
+mySheet=myBook.active
+#创建雷达图(myRadarChart)
+myRadarChart=openpyxl.chart.RadarChart()
+#设置雷达图(myRadarChart)的数据点在(半径)轴上的位置
+myRadarChart.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,max_col=3,min_row=3,max_row=9),titles_from_data=True)
+#设置雷达图(myRadarChart)在圆周上的标签
+myRadarChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                  min_col=1,min_row=4,max_row=9))
+#禁止绘制雷达图(myRadarChart)的y轴(半径轴)
+myRadarChart.y_axis.delete=True
+#设置雷达图(myRadarChart)的样式(26)
+myRadarChart.style=26
+##在雷达图(myRadarChart)的数据点上添加该数据点代表的数值
+#myRadarChart.dLbls=openpyxl.chart.label.DataLabelList()
+#myRadarChart.dLbls.showVal=True
+#使用红色(FF0000)绘制(住院人数)线条
+myRadarChart.series[0].graphicalProperties.line.solidFill="FF0000"
+#设置(住院人数)线条的宽度为15000
+myRadarChart.series[0].graphicalProperties.line.width=15000
+#设置(住院人数)数据点的图形符号
+myRadarChart.series[0].marker.symbol="square"
+#设置(住院人数)数据点的图形符号的填充颜色
+myRadarChart.series[0].marker.graphicalProperties.solidFill="22DD22"
+#设置(住院人数)数据点的图形符号的边线颜色
+myRadarChart.series[0].marker.graphicalProperties.line.solidFill="22DD22"
+#使用蓝色绘制(门诊人数)线条
+myRadarChart.series[1].graphicalProperties.line.solidFill="0000FF"
+#设置(门诊人数)线条的宽度为15000
+myRadarChart.series[1].graphicalProperties.line.width=15000
+#设置(门诊人数)数据点的图形符号
+myRadarChart.series[1].marker.symbol="circle"
+#设置(门诊人数)数据点的图形符号的填充颜色
+myRadarChart.series[1].marker.graphicalProperties.solidFill="61210B"
+#设置(门诊人数)数据点的图形符号的边线颜色
+myRadarChart.series[1].marker.graphicalProperties.line.solidFill="61210B"
+#设置雷达图(myRadarChart)的大小
+myRadarChart.layout=openpyxl.chart.layout.Layout(
+                       openpyxl.chart.layout.ManualLayout(h=0.99, w=0.99))
+#设置雷达图(myRadarChart)的标题
+#myRadarChart.title="使用雷达图展示住院和门诊人数"
+#将雷达图(myRadarChart)添加到住院表(mySheet)的A10单元格
+mySheet.add_chart(myRadarChart,"A10")
+myBook.save('结果表-住院表.xlsx')

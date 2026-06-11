@@ -1,0 +1,35 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+myBarChart=openpyxl.chart.BarChart()
+myBarChart.add_data(openpyxl.chart.Reference(mySheet,min_col=2,
+                              min_row=3,max_row=8),titles_from_data=True)
+myBarChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                           min_col=1,min_row=4,max_row=8))
+myBarChart.legend=None
+myBarChart.y_axis.majorGridlines=None
+myBarChart.title="使用柱形图展示华茂集团员工人数"
+myColumns=[openpyxl.chart.series.DataPoint(idx=i) for i in range(5)]
+myBarChart.series[0].data_points=myColumns
+#取消第1个柱子的填充颜色
+myColumns[0].graphicalProperties.noFill=True
+#设置第1个柱子的边框颜色为黑色
+myColumns[0].graphicalProperties.line.solidFill="000000"
+#取消第2个柱子的填充颜色
+myColumns[1].graphicalProperties.noFill=True
+#设置第2个柱子的边框颜色为红色
+myColumns[1].graphicalProperties.line.solidFill="FF0000"
+#取消第3个柱子的填充颜色
+myColumns[2].graphicalProperties.noFill=True
+#设置第3个柱子的边框颜色为绿色
+myColumns[2].graphicalProperties.line.solidFill="00FF00"
+#取消第4个柱子的填充颜色
+myColumns[3].graphicalProperties.noFill=True
+#设置第4个柱子的边框颜色为蓝色
+myColumns[3].graphicalProperties.line.solidFill="0000FF"
+#取消第5个柱子的填充颜色
+myColumns[4].graphicalProperties.noFill=True
+#设置第5个柱子的边框颜色为青色
+myColumns[4].graphicalProperties.line.solidFill="00FFFF"
+mySheet.add_chart(myBarChart,"C1")
+myBook.save('结果表-员工表.xlsx')

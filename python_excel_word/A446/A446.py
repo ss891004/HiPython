@@ -1,0 +1,23 @@
+import openpyxl
+myBook=openpyxl.load_workbook('员工表.xlsx')
+mySheet=myBook.active
+myBarChart=openpyxl.chart.BarChart()
+myBarChart.add_data(openpyxl.chart.Reference(mySheet,min_col=2,
+                              min_row=3,max_row=8),titles_from_data=True)
+myBarChart.set_categories(openpyxl.chart.Reference(mySheet,
+                              min_col=1,min_row=4,max_row=8))
+#创建水平条纹样式(myPattern)
+myPattern=openpyxl.chart.marker.PatternFillProperties(prst="ltHorz")
+#设置水平条纹样式(myPattern)的前景色为白色
+myPattern.foreground=openpyxl.chart.marker.ColorChoice(prstClr="white")
+#设置水平条纹样式(myPattern)的背景色为黑色
+myPattern.background=openpyxl.chart.marker.ColorChoice(prstClr="black")
+#使用水平条纹样式(myPattern)作为柱形图各个柱子的填充样式
+myBarChart.series[0].graphicalProperties.pattFill=myPattern
+#在柱形图(myBarChart)上禁止绘制图例
+myBarChart.legend=None
+#在柱形图(myBarChart)上禁止绘制y轴的主刻度线
+myBarChart.y_axis.majorGridlines=None
+myBarChart.title="使用柱形图展示华茂集团员工人数"
+mySheet.add_chart(myBarChart,"C1")
+myBook.save('结果表-员工表.xlsx')

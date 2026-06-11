@@ -1,0 +1,29 @@
+import openpyxl
+myBook=openpyxl.load_workbook('温度表.xlsx')
+mySheet=myBook.active
+#创建3D面积图(myAreaChart3D)
+myAreaChart3D=openpyxl.chart.AreaChart3D()
+#设置3D面积图(myAreaChart3D)的数据点(在y轴上的位置)
+myAreaChart3D.add_data(openpyxl.chart.Reference(mySheet,
+      min_col=2,min_row=3,max_col=3,max_row=13),titles_from_data=True)
+#设置3D面积图(myAreaChart3D)的x轴的日期标签
+myAreaChart3D.set_categories(openpyxl.chart.Reference(mySheet,
+                                      min_col=1,min_row=4,max_row=13))
+#自定义3D面积图(myAreaChart3D)的x轴的日期格式
+myAreaChart3D.x_axis.number_format='d日'
+#自定义3D面积图(myAreaChart3D)的x轴的标题
+myAreaChart3D.x_axis.title='日期'
+#自定义3D面积图(myAreaChart3D)的y轴的标题
+myAreaChart3D.y_axis.title='温度'
+#在3D面积图(myAreaChart3D)上禁止绘制图例
+myAreaChart3D.legend=None
+#设置3D面积图(myAreaChart3D)的宽度和高度
+myAreaChart3D.width=18
+myAreaChart3D.height=10
+#设置3D面积图(myAreaChart3D)的样式(23)
+myAreaChart3D.style=23
+#设置3D面积图(myAreaChart3D)的标题
+myAreaChart3D.title="使用3D面积图展示南湖气温变化"
+#将3D面积图(myAreaChart3D)添加到温度表(mySheet)的D1单元格
+mySheet.add_chart(myAreaChart3D,"D1")
+myBook.save('结果表-温度表.xlsx')

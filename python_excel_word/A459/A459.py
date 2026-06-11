@@ -1,0 +1,35 @@
+import openpyxl
+myBook=openpyxl.load_workbook('住院表.xlsx')
+mySheet=myBook.active
+#创建雷达图(myRadarChart)
+myRadarChart=openpyxl.chart.RadarChart()
+#设置雷达图(myRadarChart)的数据点在(半径)轴上的位置
+myRadarChart.add_data(openpyxl.chart.Reference(mySheet,
+                         min_col=2,max_col=2,min_row=4,max_row=15))
+#设置雷达图(myRadarChart)在圆周上的标签
+myRadarChart.set_categories(openpyxl.chart.Reference(mySheet,
+                                   min_col=1,min_row=4,max_row=15))
+#禁止绘制雷达图(myRadarChart)的y轴(半径轴)
+myRadarChart.y_axis.delete=True
+#设置雷达图(myRadarChart)的样式(26)
+myRadarChart.style=26
+#使用红色(BB2244)绘制线条(各个数据点的连线)
+myRadarChart.series[0].graphicalProperties.line.solidFill="BB2244"
+#设置雷达图(myRadarChart)的线条宽度为15000
+myRadarChart.series[0].graphicalProperties.line.width=15000
+#在雷达图(myRadarChart)的数据点上添加该数据点代表的数值
+myRadarChart.dLbls=openpyxl.chart.label.DataLabelList()
+myRadarChart.dLbls.showVal=True
+#在雷达图(myRadarChart)上设置数据点的图形符号
+myRadarChart.series[0].marker.symbol="square"
+#在雷达图(myRadarChart)上设置数据点的图形符号的填充颜色
+myRadarChart.series[0].marker.graphicalProperties.solidFill="22DD22"
+#在雷达图(myRadarChart)上设置数据点的图形符号的边线颜色
+myRadarChart.series[0].marker.graphicalProperties.line.solidFill="22DD22"
+#设置禁止绘制雷达图(myRadarChart)的图例
+myRadarChart.legend=None
+#设置雷达图(myRadarChart)的标题
+myRadarChart.title="使用雷达图展示2018年度住院人数"
+#将雷达图(myRadarChart)添加到住院表(mySheet)的C1单元格
+mySheet.add_chart(myRadarChart,"C1")
+myBook.save('结果表-住院表.xlsx')
