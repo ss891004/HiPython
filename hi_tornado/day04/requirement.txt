@@ -1,4 +1,0 @@
-pymysql
-sqlalchemy
-tornado==4.5
-baidu-aip
