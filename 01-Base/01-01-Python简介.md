@@ -1,12 +1,8 @@
 
 # Python
-
 + Python 是一种解释型语言： 这意味着开发过程中没有了编译这个环节。类似于PHP和Perl语言。
-
 + Python 是交互式语言： 这意味着，您可以在一个 Python 提示符 >>> 后直接执行代码。
-
 + Python 是面向对象语言: 这意味着Python支持面向对象的风格或代码封装在对象的编程技术。
-
 + Python 是初学者的语言：Python 对初级程序员而言，是一种伟大的语言，它支持广泛的应用程序开发，从简单的文字处理到 WWW 浏览器再到游戏。
 
 ![](./img/img0101.png)
@@ -27,10 +23,14 @@
 # Python & vscode 
 
 + https://code.visualstudio.com/
++ 安装python插件
++ 选择python解释器
 
 
 # python 虚拟环境
 ![alt text](./img/img0102.png)
+
+
 + 1.创建一个虚拟环境
 ```
 D:\>mkdir test_venv
